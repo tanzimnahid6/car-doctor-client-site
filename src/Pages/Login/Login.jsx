@@ -1,16 +1,32 @@
-import React from "react"
+import React, { useContext } from "react"
 import img from "./../../../src/assets/images/login/login.svg"
 import { Link } from "react-router-dom"
+import { AuthContext } from "../../Provider/AuthProvider"
 
 const Login = () => {
+  const { signIn,setUser } = useContext(AuthContext)
   const handleLogin = (e) => {
     e.preventDefault()
-    console.log("cliked")
+    
     const form = e.target
-    const email = form.email.value 
+    const email = form.email.value
     const password = form.password.value
 
-    console.log(email,password)
+    console.log(email, password)
+    signIn(email,password)
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      console.log('Login User',user);
+      setUser(user)
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorMessage);
+    });
+
   }
   return (
     <div>
@@ -59,7 +75,7 @@ const Login = () => {
                 New To Car Doctors ?{" "}
                 <Link className="text-orange-400" to="/signup">
                   Sign Up
-                </Link>{" "}
+                </Link>
               </p>
             </div>
           </div>

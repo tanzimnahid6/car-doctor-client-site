@@ -15,6 +15,7 @@ const SignUp = () => {
 
     console.log(name, email, password)
     //create user login password
+  
     createUser(email, password)
     .then(result => {
         const user = result.user;
@@ -76,14 +77,14 @@ const SignUp = () => {
                   className="btn btn-error"
                   type="submit"
                   value="Sign Up"
-                />
+                /> 
               </div>
             </form>
             <div className="text-center">
               <p>
                 Already have an account ?{" "}
                 <Link className="text-orange-400" to="/login">
-                  Sign Up
+                  Login
                 </Link>
               </p>
             </div>
