@@ -1,10 +1,11 @@
 import React, { useContext } from "react"
 import img from "./../../../src/assets/images/login/login.svg"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../../Provider/AuthProvider"
 
 const SignUp = () => {
-  const { createUser } = useContext(AuthContext)
+  const { createUser,logOut } = useContext(AuthContext)
+  const navigate = useNavigate()
 
   const handleSingUp = (e) => {
     e.preventDefault()
@@ -13,6 +14,7 @@ const SignUp = () => {
     const email = form.email.value
     const password = form.password.value
 
+
     console.log(name, email, password)
     //create user login password
   
@@ -20,6 +22,11 @@ const SignUp = () => {
     .then(result => {
         const user = result.user;
         console.log(user)
+        logOut()
+        form.reset()
+        alert('User Create Successfully')
+        navigate('/login')
+
     })
     .catch(error => console.log(error))
   }

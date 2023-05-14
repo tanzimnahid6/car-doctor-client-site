@@ -1,10 +1,14 @@
 import React, { useContext } from "react"
 import img from "./../../../src/assets/images/login/login.svg"
-import { Link } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { AuthContext } from "../../Provider/AuthProvider"
 
 const Login = () => {
   const { signIn,setUser } = useContext(AuthContext)
+  const location = useLocation() 
+  const navigate = useNavigate()
+  const path = location.state?.from?.pathname || '/'
+
   const handleLogin = (e) => {
     e.preventDefault()
     
@@ -17,8 +21,10 @@ const Login = () => {
     .then((userCredential) => {
       // Signed in 
       const user = userCredential.user;
-      console.log('Login User',user);
+      
       setUser(user)
+      navigate(path,{replace:true})
+
       // ...
     })
     .catch((error) => {
