@@ -30,14 +30,15 @@ const Bookings = () => {
             </th>
             <th className="">Name</th>
             <th>Work</th>
+            <th>Price</th>
             <th>Date</th>
-            <th></th>
+            <th>More</th>
           </tr>
         </thead>
         <tbody>
           {/* row 1 */}
           {bookings.map((booking) => (
-            <BookingRow booking={booking} key={booking._id}></BookingRow>
+            <BookingRow bookings={bookings} setBookings={setBookings} booking={booking} key={booking._id}></BookingRow>
           ))}
         </tbody>
       </table>
